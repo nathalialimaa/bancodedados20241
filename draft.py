@@ -1,6 +1,11 @@
-from functions.create_db import create_db
 
-create_db('meuqueridobanco')
+from functions.create_db import create_db
+from functions.drop_table import drop_table
+drop_table(
+    database= 'mydatabase'
+    table_name = 'cliente'
+)
+create_db('mydatabase')
 
 import sqlite3
 
@@ -17,12 +22,6 @@ def create_db(
     sqlite3.Connection: A connection object to the SQLite database.
     """
     return sqlite3.connect(f'{database_name}.db')
-
-
-
-
-
-
 
 
 import pandas as pd
@@ -43,7 +42,20 @@ data.to_sql(
 conn.close()
 
 conn = sqlite3.connect('mydatabase.db')
-cursor = conn.cursor()
+cursor = conn.cursor()#faz com que consiga passar querys para dentro do banco
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS cliente 
+               (
+               id_cliente INT,
+               nome TEXT
+               )          
+               """)
+
+cursor.execute
+("""
+    DROP TABLE cliente
+""")
+
 query = """
     SELECT name 
     FROM client
