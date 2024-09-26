@@ -43,3 +43,4 @@ def insert_one_row(
     conn.close()
 
     return None
+
